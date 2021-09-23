@@ -1,4 +1,4 @@
 .Rhistory
 *.sh
 .Rproj.user
-.RData
+*.RData*
