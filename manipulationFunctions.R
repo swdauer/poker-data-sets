@@ -14,9 +14,9 @@ suited <- function(lowCard, highCard) {
   getSuit(lowCard) == getSuit(highCard)
 }
 
-occurHandI <- function(set, handNum, lowRank, highRank, suited) {
-  card1 = paste0("hand", toString(handNum), "_0")
-  card2 = paste0("hand", toString(handNum), "_1")
+occurHandI <- function(set, playerNum, lowRank, highRank, suited) {
+  card1 = paste0("hand", toString(playerNum), "_0")
+  card2 = paste0("hand", toString(playerNum), "_1")
   set[hasRanks(set[[card1]],
                set[[card2]],
                lowRank,

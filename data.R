@@ -1,4 +1,4 @@
-ranks <- c("2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A")
+ranks <- as.array(c("2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"))
 
 handRanks <- unlist(lapply(ranks, 
                            function(y) lapply(ranks[match(y,ranks):length(ranks)],
@@ -14,6 +14,10 @@ allHands <- unlist(lapply(handRanks, function(x)
       c(x[1], x[2], TRUE)
     )
   }), recursive = FALSE)
+
+allHandsTablesFirstSetP1 <- allHandsTables(firstSet, 1)
+
+winRatesFirstSetP1 <- winRates(allHandsTablesFirstSetP1, 1)
 
 firstSet <- read.csv("texasHoldEmHeadsUp_01_1000000.csv")
 secondSet <- read.csv("texasHoldEmHeadsUp_02_1000000.csv")
