@@ -1,23 +1,19 @@
 ranks <- as.array(c("2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"))
 
-handRanks <- unlist(lapply(ranks, 
-                           function(y) lapply(ranks[match(y,ranks):length(ranks)],
-                                              function(x) c(y, x))),
-                    recursive = FALSE)
+handRanks <- Reduce(rbind, apply(ranks, c(1), function(x) {
+  t(apply(as.array(ranks[match(x, ranks):length(ranks)]), c(1), function(y) {
+    as.array(c(x, y))
+  }))
+}))
 
-allHands <- unlist(lapply(handRanks, function(x)
+allHands <- Reduce(rbind, apply(handRanks, c(1), function(x) {
   if (x[1] == x[2]) {
-    list(c(x[1], x[2], FALSE))
+    as.array(c(x[1], x[2], FALSE))
   } else {
-    list(
-      c(x[1], x[2], FALSE),
-      c(x[1], x[2], TRUE)
-    )
-  }), recursive = FALSE)
-
-allHandsTablesFirstSetP1 <- allHandsTables(firstSet, 1)
-
-winRatesFirstSetP1 <- winRates(allHandsTablesFirstSetP1, 1)
+    rbind(as.array(c(x[1], x[2], FALSE)),
+          as.array(c(x[1], x[2], TRUE)))
+  }
+}))
 
 firstSet <- read.csv("texasHoldEmHeadsUp_01_1000000.csv")
 secondSet <- read.csv("texasHoldEmHeadsUp_02_1000000.csv")
