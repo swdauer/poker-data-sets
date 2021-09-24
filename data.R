@@ -15,6 +15,15 @@ allHands <- Reduce(rbind, apply(handRanks, c(1), function(x) {
   }
 }))
 
+firstSetP1AllHands <- occurAllHandsTables(firstSet, 1)
+
+firstSetP1WinRates <- t(apply(as.array(1:nrow(allHands)), c(1), function(x) {
+  table <- firstSetP1AllHands[[x]]
+  as.array(c(allHands[x,1], allHands[x,2], allHands[x,3], nrow(table[table[["winner"]] == 1,])/nrow(table)))
+}))
+
+sortedFSP1WR <- firstSetP1WinRates[order(firstSetP1WinRates[,4], decreasing = TRUE),]
+
 firstSet <- read.csv("texasHoldEmHeadsUp_01_1000000.csv")
 secondSet <- read.csv("texasHoldEmHeadsUp_02_1000000.csv")
 thirdSet <- read.csv("texasHoldEmHeadsUp_03_1000000.csv")

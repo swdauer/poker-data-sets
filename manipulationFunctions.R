@@ -23,3 +23,7 @@ occurHandI <- function(set, playerNum, lowRank, highRank, suited) {
                highRank)
       & !xor(suited,suited(set[[card1]], set[[card2]])),]
 }
+
+occurAllHandsTables <- function(set, playerNum) {
+  apply(allHands, c(1), function(x) occurHandI(set, playerNum, x[1], x[2], str2lang(x[3])))
+}
