@@ -20,3 +20,5 @@ hand1_0,hand1_1,h1_type,hand2_0,hand2_1,h2_type,board_0,board_1,board_2,board_3,
 - `h2_type` is the same but for the second player
 - `board_j` is the j'th card of the board
 - `winner` is the winner of the hand i.e. 1 is a first player win, 2 is a second player win, and 0 is a tie
+
+    Note: `j` is an integer which lies in the range `[0,numCards)`
